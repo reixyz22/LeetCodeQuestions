@@ -1,4 +1,4 @@
-class Solution { //roman nums r fucking dumb
+class Solution {
 public:
     string intToRoman(int num) {
         struct pair{ //letter char struct
