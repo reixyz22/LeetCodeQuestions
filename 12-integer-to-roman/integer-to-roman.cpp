@@ -1,24 +1,23 @@
-class Solution { public:string intToRoman(int input) {
-    
-    string output = ""; //concat this with Romans to make your solution / output
+#include <vector>
+#include <string>
+#include <utility>
 
-    struct pair{ //letter char pair in c++
-        string letter;
-        int number;
-    };
-    pair dex [] = {{"I",1}, {"IV",4}, {"V",5}, {"IX", 9}, {"X",10}, {"XL",40}, {"L",50}, {"XC",90}, {"C",100}, {"CD",400}, {"D",500}, {"CM",900}, {"M",1000} };   //array of letter string pairs
-    
+class Solution {
+public:
+    std::string intToRoman(int num) {
+        std::vector<std::pair<int, std::string>> values = {
+            {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"},
+            {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"},
+            {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"}
+        };
 
-    while (true) { //loop through the input
-        for(int i = 12; i >= 0 ;i--){ // loop through the pairs starting from the back
-            if(input / dex[i].number >= 1){ // start backwards(checking biggest numbers first) and check if you can take this out, if you can then do so. IE: (14)XIV - (10)X = (4)IV
-                output += dex[i].letter; // put the Roman into the output IE X
-                input -= dex[i].number; // take the corresponding number out of the input IE num -=10 
-                if(input == 0){ return output; } //if you 0 out, IE 11 - X = 1. 1 - I == 0 end the program
-                break; //if not move onto next part of the input
+        std::string result;
+        for (auto& [value, roman] : values) {
+            while (num >= value) {
+                result += roman;
+                num -= value;
             }
         }
+        return result;
     }
-
-return 0; // the program never hits this as num==0 will always trigger, but we need this to compile in c++
-}};
+};
