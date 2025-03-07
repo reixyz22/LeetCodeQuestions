@@ -7,15 +7,15 @@
 class Solution:
     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
 
-        def dfs(node: Optional[TreeNode]):
+        def binary_s(node: Optional[TreeNode]):
             if node:
                 if node.val == val:
                     return node
 
                 if node.val < val: # node smaller than val
-                    return dfs(node.right) # move right to look for larger numbers
+                    return binary_s(node.right) # move right to look for larger numbers
                 if node.val > val:
-                    return dfs(node.left)
+                    return binary_s(node.left)
             return
         
-        return dfs(root)
+        return binary_s(root)
